@@ -11,5 +11,7 @@ int ajouter(char *, Dons );
 int modifier( char *, int, Dons );
 int supprimer(char *, int );
 Dons chercher(char *, int);
+float quantite_type(char *, char []);
+void sang_rare(char *, char []);
 
 #endif
