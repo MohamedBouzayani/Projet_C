@@ -4,8 +4,8 @@
 
 int main()
 {
-    Dons d1 = {4734, 12345678, "A+", 0.5, "Ariana"};
-    Dons d2 = {23784, 12345678, "O-", 0.7, "Tunis"};
+    Dons d1 = {"A+", "Ariana", 4734, 12345678, 0.5};
+    Dons d2 = {"O-", "Tunis", 23784, 12345678, 0.7};
     Dons d3;
 
     int x = ajouter("Dons.txt", d1);
@@ -32,3 +32,4 @@ int main()
 
     return 0;
 }
+
