@@ -100,11 +100,10 @@ float quantite_type(char * Dons, char type_sang[]) {
 }
 void sang_rare(char * Dons, char sangRare[]) {
     char *types[] = {"A+", "B+", "AB+", "O+","A-", "B-", "AB-", "O-"};
-    int num_types = sizeof(types) / sizeof(types[0]);
     float min_quantity = -1;
     char min_type[5];
 
-    for (int i = 0; i < num_types; i++) {
+    for (int i = 0; i < 8; i++) {
         float quantity = quantite_type(Dons, types[i]);
         if (min_quantity == -1 || quantity < min_quantity) {
             min_quantity = quantity;
