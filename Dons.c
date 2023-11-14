@@ -99,7 +99,7 @@ float quantite_type(char * Dons, char type_sang[]) {
     return total_quantity;
 }
 void sang_rare(char * Dons, char sangRare[]) {
-    char *types[] = {"A", "B", "AB", "O"}; // Add more blood types if needed
+    char *types[] = {"A+", "B+", "AB+", "O+","A-", "B-", "AB-", "O-"};
     int num_types = sizeof(types) / sizeof(types[0]);
     float min_quantity = -1;
     char min_type[5];
