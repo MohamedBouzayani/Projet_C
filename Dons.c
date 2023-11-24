@@ -1,5 +1,6 @@
 #include "Dons.h"
 #include <string.h>
+#include <stdlib.h>
 
 int ajouter(char * fileName, Dons d )
 {
@@ -88,7 +89,7 @@ float quantite_type(char * fileName, char type_sang[]) {
     float total_quantity = 0;
 
     if (f != NULL) {
-        while (fscanf(f, "%s %s %s %s %s\n", &d.id, &d.cin, d.type, &d.quantity, d.etablissement) != EOF) {
+        while (fscanf(f, "%s %s %s %s %s\n", d.id, d.cin, d.type, d.quantity, d.etablissement) != EOF) {
             if (strcmp(d.type, type_sang) == 0) {
                 total_quantity += atof(d.quantity);
             }
