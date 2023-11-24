@@ -6,14 +6,14 @@ int ajouter(char * fileName, Dons d )
     FILE * f=fopen(fileName, "a");
     if(f!=NULL)
     {
-        fprintf(f,"%lf %lf %s %.2f %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement);
+        fprintf(f,"%s %s %s %s %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement);
         fclose(f);
         return 1;
     }
     else return 0;
 }
 
-int modifier( char * fileName, int id, Dons nouv )
+int modifier( char * fileName, char * id, Dons nouv )
 {
     int tr=0;
     Dons d;
@@ -21,15 +21,15 @@ int modifier( char * fileName, int id, Dons nouv )
     FILE * f2=fopen("temp.txt", "w");
     if(f!=NULL && f2!=NULL)
     {
-        while(fscanf(f,"%lf %lf %s %f %s\n",&d.id,&d.cin,d.type,&d.quantity,d.etablissement)!=EOF)
+        while(fscanf(f,"%s %s %s %s %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement)!=EOF)
         {
-            if(d.id== id)
+            if(strcmp(d.id, id) == 0)
             {
-                fprintf(f2,"%lf %lf %s %.2f %s\n",nouv.id,nouv.cin,nouv.type,nouv.quantity,nouv.etablissement);
+                fprintf(f2,"%s %s %s %s %s\n",nouv.id,nouv.cin,nouv.type,nouv.quantity,nouv.etablissement);
                 tr=1;
             }
             else
-                fprintf(f2,"%lf %lf %s %.2f %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement);
+                fprintf(f2,"%s %s %s %s %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement);
 
         }
     }
@@ -41,7 +41,7 @@ int modifier( char * fileName, int id, Dons nouv )
 
 }
 
-int supprimer(char * fileName, int id)
+int supprimer(char * fileName, char * id)
 {
     int tr=0;
     Dons d;
@@ -49,12 +49,12 @@ int supprimer(char * fileName, int id)
     FILE * f2=fopen("temp.txt", "w");
     if(f!=NULL && f2!=NULL)
     {
-        while(fscanf(f,"%lf %lf %s %f %s\n",&d.id,&d.cin,d.type,&d.quantity,d.etablissement)!=EOF)
+        while(fscanf(f,"%s %s %s %s %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement)!=EOF)
         {
-            if(d.id== id)
+            if(strcmp(d.id, id) == 0)
                 tr=1;
             else
-                fprintf(f2,"%lf %lf %s %.2f %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement);
+                fprintf(f2,"%s %s %s %s %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement);
         }
     }
     fclose(f);
@@ -64,22 +64,22 @@ int supprimer(char * fileName, int id)
     return tr;
 }
 
-Dons chercher(char * fileName, int id)
+Dons chercher(char * fileName, char * id)
 {
     Dons d;
     int tr = 0;
     FILE * f=fopen(fileName, "r");
     if(f!=NULL)
     {
-        while(tr==0 && fscanf(f,"%lf %lf %s %f %s\n",&d.id,&d.cin,d.type,&d.quantity,d.etablissement)!=EOF)
+        while(tr==0 && fscanf(f,"%s %s %s %s %s\n",d.id,d.cin,d.type,d.quantity,d.etablissement)!=EOF)
         {
-            if(d.id== id)
+            if(strcmp(d.id, id) == 0)
                 tr=1;
         }
     }
     fclose(f);
     if(tr==0)
-        d.id=-1;
+        strcpy(d.id, "-1");
     return d;
 }
 float quantite_type(char * fileName, char type_sang[]) {
@@ -88,9 +88,9 @@ float quantite_type(char * fileName, char type_sang[]) {
     float total_quantity = 0;
 
     if (f != NULL) {
-        while (fscanf(f, "%lf %lf %s %f %s\n", &d.id, &d.cin, d.type, &d.quantity, d.etablissement) != EOF) {
+        while (fscanf(f, "%s %s %s %s %s\n", &d.id, &d.cin, d.type, &d.quantity, d.etablissement) != EOF) {
             if (strcmp(d.type, type_sang) == 0) {
-                total_quantity += d.quantity;
+                total_quantity += atof(d.quantity);
             }
         }
         fclose(f);
